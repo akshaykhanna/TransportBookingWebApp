@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        var bimtechCount = 0;
+        var noidaCount = 0;
+        var currBookie = '';
+        var prevBookie = '';
+        function addbooking() {
+            console.log('pre: currBookie:' + prevBookie);
+            currBookie = document.getElementById('rollno').value;
+            if (document.getElementById('bimtech').checked) {
+                currBookie += 'B';
+                if (currBookie !== prevBookie)
+                    bimtechCount++;
+            } else if (document.getElementById('noida').checked) {
+                currBookie += 'N'
+                if (currBookie !== prevBookie)
+                    noidaCount++;
+            }
+            prevBookie = currBookie;
+            console.log('bim:' + bimtechCount + ', noida:' + noidaCount);
+            console.log('post: currBookie:' + currBookie);
+            document.getElementById('pcb').innerText = bimtechCount;
+            document.getElementById('pcn').innerText = noidaCount;
+            if (bimtechCount > noidaCount) {
+                chooseAndSetVeichle(bimtechCount);
+            } else {
+                chooseAndSetVeichle(noidaCount);
+            }
+        }
+        function chooseAndSetVeichle(c) {
+            alert('chooseAndSetVeichle()');
+            vt = "";
+            if (c <= 4) {
+                vt = 'Sedan';
+            } else if (c <= 7) {
+                vt = 'Innova';
+            } else {
+                vt = 'Bus';
+            }
+            document.getElementById('vtb').innerText = vt;
+            document.getElementById('vtn').innerText = vt;
+            document.getElementById("imgB").src = vt + ".jpg";
+            document.getElementById("imgN").src = vt + ".jpg";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="jumbotron" style="text-align: center">
+        <h1>Book your travels</h1>
+    </div>
+    <div class="container row">
+        <div class="col-sm-1"></div>
+        <form class="form-horizontal col-sm-7">
+            <h2>Enter your details</h2>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="name">Name:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="rollno">Roll no.:</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="rollno" placeholder="Enter your roll no." name="rollno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="rollno">Date:</label>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control" id="date" name="date">
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="control-label col-sm-3">Place to travel</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline ">
+                        <input type="radio" checked id="bimtech" name='travel'>BIMTECH</label>
+                    <label class="radio-inline">
+                        <input type="radio" id="noida" name='travel'>Noida</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-default" onClick="addbooking()">Book ></button>
+                </div>
+            </div>
+        </form>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
+            <div class="container">
+                <div class="row">
+                    <h3>Towards BIMTECH</h3>
+                </div>
+                <div class="row">
+                    <strong>Veichle:</strong>
+                    <span id='vtb'>Sedan</span>
+                </div>
+                <div class="row">
+                    <strong>Passengers Count:</strong>
+                    <span id='pcb'>0</span>
+                </div>
+                <div class="row">
+                    <img src="sedan.jpg" id="imgB" width="170px" height="100px" />
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <h3>Towards noida</h3>
+                </div>
+                <div class="row">
+                    <strong>Veichle:</strong>
+                    <span id='vtn'>Sedan</span>
+                </div>
+                <div class="row">
+                    <strong>Passengers Count:</strong>
+                    <span id='pcn'>0</span>
+                </div>
+                <div class="row">
+                    <img src="sedan.jpg" id="imgN" width="170px" height="100px" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
